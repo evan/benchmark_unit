@@ -1,0 +1,10 @@
+
+benchmark_unit
+
+Adds machine-independent benchmark assertions to your unit tests.
+
+== License
+
+Copyright 2007 Cloudburst, LLC. See included LICENSE file.
+
+The public certificate for this gem is at http://rubyforge.org/frs/download.php/25331/evan_weaver-original-public_cert.pem.

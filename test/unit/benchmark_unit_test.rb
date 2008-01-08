@@ -27,7 +27,7 @@ class BenchmarkUnitTest < Test::Unit::TestCase
   end 
   
   def test_failed_assertion_has_clean_backtrace
-    # XXX
+    # XXX Todo
   end
   
 end
