@@ -24,7 +24,7 @@ First, require the library. Then, in a regular Test::Unit::TestCase, call either
 
   require 'benchmark/unit'
   
-  class BenchmarkUnitTest < Test::Unit::TestCase
+  class MyTest < Test::Unit::TestCase
     
     def test_speed_of_critical_method
       assert_faster(3) do
