@@ -12,7 +12,7 @@ The public certificate for this gem is at http://rubyforge.org/frs/download.php/
 == Features
 
 * Test::Unit-compatible
-* machine-independent measurements
+* machine-independent measurement units
 
 == Installation
 
@@ -26,7 +26,7 @@ First, require the library. Then, in a regular Test::Unit::TestCase, call either
   
   class BenchmarkUnitTest < Test::Unit::TestCase
     
-    def test_faster
+    def test_speed_of_critical_method
       assert_faster(3) do
         MyCriticalMethod("data")
       end
@@ -36,7 +36,7 @@ First, require the library. Then, in a regular Test::Unit::TestCase, call either
 
 You do not have to manually run the block multiple times; the library does that for you.
   
-To find how many RubySeconds to start with, just omit the argument to assert. The test will fail and report how long your block took. Add a little bit and use that as your initial failure point.
+To find how many RubySeconds to start with, just omit the argument to the <tt>assert_faster</tt> or <tt>assert_slower</tt> call. The test will fail and report how long your block took. Add a little bit and use that as your initial failure point.
 
 See Benchmark::RubySeconds for more details.
 
