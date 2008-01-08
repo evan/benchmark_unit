@@ -71,7 +71,8 @@ To see what your machine's RubySecond is in clock-seconds, call Benchmark::RubyS
         recurse(20)
       end
       
-      def recurse(i) #:nodoc:
+      # Recurse <tt>i</tt> times.
+      def recurse(i)
         recurse(i - 1) if i > 0
       end
       
