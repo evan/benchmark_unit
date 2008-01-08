@@ -1,8 +1,11 @@
 
 require 'benchmark'
+require 'benchmark/float'
 
 module Benchmark
   module Unit
+
+    CLOCK_TARGET = 2
   
     def measure
       RubySeconds.new(
@@ -71,36 +74,54 @@ module Benchmark
   
     module Assertions
       
-      CLOCK_TARGET = 2
+      def assert_faster(target)
+        clean_backtrace do
+          compare_benchmark(target, :faster)
+        end
+      end
+      
+      def assert_slower(target)
+        clean_backtrace do
+          compare_benchmark(target, :slower)
+        end
+      end      
       
       private
       
       def compare_benchmark(target, operator)
-        clean_backtrace do
-          time_for_one = Benchmark::Unit.measure do 
+        time_for_one = Benchmark::Unit.measure do 
+          yield
+        end
+        
+        iterations = CLOCK_TARGET / time_for_one
+        iterations = 1 if iterations < 1
+        
+        total = Benchmark::Unit.measure do 
+          iterations.times do
             yield
           end
-          
-          iterations = CLOCK_TARGET / time_for_one
-          iterations = 1 if iterations < 1
-          
-          total = Benchmark::Unit.measure do 
-            iterations.times do
-              yield
-            end
-          end
-          
-          time = total / iterations          
-          message = "Time #{time} RubySeconds expected to be #{operator} than #{target} RubySeconds."
-          
-          if operator == :faster        
-            assert((time < target), message)
-          elsif operator == :slower
-            assert((time > target), message)
-          end
         end
-      end  
+        
+        time = total / iterations          
+        message = "Time #{time} RubySeconds expected to be #{operator} than #{target} RubySeconds."
+        
+        if operator == :faster        
+          assert((time < target), message)
+        elsif operator == :slower
+          assert((time > target), message)
+        end
+      end
       
+    end
+  end
+end
+
+require 'test/unit/error'
+
+module Test
+  module Unit
+    class TestCase
+      include Benchmark::Unit::Assertions
     end
   end
 end
