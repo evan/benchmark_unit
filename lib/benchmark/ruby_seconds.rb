@@ -42,14 +42,14 @@ To see what your machine's RubySecond is in clock-seconds, call Benchmark::RubyS
       
       protected
 
-      # Measure the "standard" Ruby unit of time.
+      # Measure the "standard" Ruby unit of time on this machine.
       def measure 
         Benchmark.measure do
           4.times { quanta }
         end.total / 4.0
       end      
       
-      # Perform some typical Ruby operations so we can measure how long they take on this machine.
+      # Perform some typical Ruby operations.
       def quanta
         # Allocate things
         array = [[:symbol, "a = 3 if true", 2, Math::PI**2, "large string"*30]] * 100
