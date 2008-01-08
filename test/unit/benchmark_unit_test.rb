@@ -21,10 +21,8 @@ class BenchmarkUnitTest < Test::Unit::TestCase
     assert_slower do
       "string" * 100
     end   
-    assert_slower(2) do
-      Thread.critical do
-        sleep(2.2 * Benchmark::RubySeconds.size)
-      end
+    assert_slower(1.1) do
+      "string" * 30000000
     end
   end 
   
