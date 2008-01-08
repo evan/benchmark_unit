@@ -4,7 +4,7 @@ $LOAD_PATH << File.dirname(__FILE__) + "/../../lib"
 require 'benchmark/unit'
 require 'test/unit'
 
-# STDERR.puts "RubySeconds.size is #{Benchmark::RubySeconds.size}"
+STDERR.puts "RubySeconds.size is #{Benchmark::RubySeconds.size}" if ENV['DEBUG']
 
 class BenchmarkUnitTest < Test::Unit::TestCase
   
@@ -27,7 +27,7 @@ class BenchmarkUnitTest < Test::Unit::TestCase
     
     assert_raises Test::Unit::AssertionFailedError do
       assert_slower do
-        "string" * 100
+        "string" * 3000
       end   
     end
   end
