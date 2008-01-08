@@ -28,13 +28,6 @@ To see what your machine's RubySecond is in clock-seconds, call Benchmark::RubyS
   
     class << self
     
-      # Measure the "standard" Ruby unit of time.
-      def measure #:nodoc:
-        Benchmark.measure do
-          4.times { quanta }
-        end.total / 4.0
-      end
-      
       # Return the size of a single RubySecond in clock-seconds for this machine.
       def size
         @size ||= begin
@@ -47,7 +40,14 @@ To see what your machine's RubySecond is in clock-seconds, call Benchmark::RubyS
         end
       end
       
-      private 
+      protected
+
+      # Measure the "standard" Ruby unit of time.
+      def measure 
+        Benchmark.measure do
+          4.times { quanta }
+        end.total / 4.0
+      end      
       
       # Perform some typical Ruby operations so we can measure how long they take on this machine.
       def quanta
@@ -71,7 +71,7 @@ To see what your machine's RubySecond is in clock-seconds, call Benchmark::RubyS
         recurse(20)
       end
       
-      def recurse(i)
+      def recurse(i) #:nodoc:
         recurse(i - 1) if i > 0
       end
       
