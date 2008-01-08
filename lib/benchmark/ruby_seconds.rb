@@ -1,17 +1,16 @@
 
-module Benchmark
+module Benchmark #:nodoc:
 
 =begin rdoc
-RubySeconds are a (relatively) machine-independent time measurement derived from benchmarking your hardware   on a known block of typical Ruby code.
+RubySeconds are a machine-independent time measurement derived from benchmarking your hardware on some typical Ruby code. A RubySecond should be consistent enough for testing purposes across most architectures--hopefully within a 1/2 order of magnitude.
 
-To see what your machine's RubySeconds size is, in clock-seconds, call Benchmark::RubySeconds.size.
-
+To see what your machine's RubySecond is in clock-seconds, call Benchmark::RubySeconds.size. 
 =end
   class RubySeconds
   
     PRECISION = 0.05
       
-    attr_accessor :value
+    attr_reader :value
       
     # Create a RubySeconds object from clock-seconds.
     def initialize(seconds)
@@ -30,16 +29,17 @@ To see what your machine's RubySeconds size is, in clock-seconds, call Benchmark
     class << self
     
       # Measure the "standard" Ruby unit of time.
-      def measure 
+      def measure #:nodoc:
         Benchmark.measure do
           4.times { quanta }
         end.total / 4.0
       end
       
-      # Gradually approach a stable unit size and then memoize it.
+      # Return the size of a single RubySecond in clock-seconds for this machine.
       def size
         @size ||= begin
           last, size = 0, measure
+          # Gradually approach a stable unit size, up to PRECISION %
           while (size < last or (size - last) / size > PRECISION) do
             last, size = size, measure
           end

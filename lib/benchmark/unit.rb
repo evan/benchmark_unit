@@ -10,11 +10,12 @@ require 'benchmark/ruby_seconds'
 require 'benchmark/assertions'
 require 'benchmark/float'
 
-module Benchmark
+module Benchmark #:nodoc:
   module Unit
 
     CLOCK_TARGET = 2
     
+    # Measure a single run of a block in RubySeconds.
     def self.measure
       RubySeconds.new(
         Benchmark.measure do

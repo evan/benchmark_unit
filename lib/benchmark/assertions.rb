@@ -1,7 +1,7 @@
 
 require 'test/unit'
 
-module Benchmark
+module Benchmark #:nodoc:
   module Unit
     module Assertions
       
@@ -77,6 +77,8 @@ module Benchmark
     end
   end
 end
+
+#:stopdoc:
 
 class Test::Unit::TestCase
   include Benchmark::Unit::Assertions

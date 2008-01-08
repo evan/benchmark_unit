@@ -1,7 +1,7 @@
 
 benchmark_unit
 
-Adds machine-independent benchmark assertions to your unit tests.
+Machine-independent benchmark assertions for your unit tests.
 
 == License
 
@@ -9,17 +9,36 @@ Copyright 2007 Cloudburst, LLC. See included LICENSE file.
 
 The public certificate for this gem is at http://rubyforge.org/frs/download.php/25331/evan_weaver-original-public_cert.pem.
 
+== Features
+
+* Test::Unit-compatible
+* machine-independent measurements
+
 == Installation
 
   sudo gem install benchmark_unit
 
 == Usage
 
-First, require the library. Then, in a regular Test::Unit::TestCase, call either <tt>assert_faster</tt> or <tt>assert_slower</tt>. Pass a number of RubySeconds and a block to benchmark.
+First, require the library. Then, in a regular Test::Unit::TestCase, call either <tt>assert_faster</tt> or <tt>assert_slower</tt>. Pass a number of RubySeconds and a block to benchmark. 
 
-require 'benchmark/unit'
+  require 'benchmark/unit'
+  
+  class BenchmarkUnitTest < Test::Unit::TestCase
+    
+    def test_faster
+      assert_faster(3) do
+        MyCriticalMethod("data")
+      end
+    end
+      
+  end
 
+You do not have to manually run the block multiple times; the library does that for you.
+  
+To find how many RubySeconds to start with, just omit the argument to assert. The test will fail and report how long your block took. Add a little bit and use that as your initial failure point.
 
+See Benchmark::RubySeconds for more details.
 
 == Reporting problems
 
