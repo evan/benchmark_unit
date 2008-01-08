@@ -4,27 +4,26 @@ $LOAD_PATH << File.dirname(__FILE__) + "/../../lib"
 require 'benchmark/unit'
 require 'test/unit'
 
+# STDERR.puts "RubySeconds.size is #{Benchmark::RubySeconds.size}"
+
 class BenchmarkUnitTest < Test::Unit::TestCase
   
   def test_faster
     assert_faster do
-      sleep(1)
+      # Do nothing
     end 
+    assert_faster(3) do
+      "string" * 100
+    end
   end
 
   def test_slower
     assert_slower do
-      # Do nothing
+      "string" * 100
     end   
-  end
-
-  def test_wrapped_faster
-  
-  end
-
-  def test_wrapped_slower
-  
-  end
-
+    assert_slower(2) do
+      sleep(2.2 * Benchmark::RubySeconds.size)
+    end
+  end 
   
 end
