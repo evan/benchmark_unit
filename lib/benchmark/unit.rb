@@ -74,13 +74,13 @@ module Benchmark
   
     module Assertions
       
-      def assert_faster(target)
+      def assert_faster(target = 0)
         clean_backtrace do
           compare_benchmark(target, :faster)
         end
       end
       
-      def assert_slower(target)
+      def assert_slower(target = 1/0.0) # Infinity
         clean_backtrace do
           compare_benchmark(target, :slower)
         end
