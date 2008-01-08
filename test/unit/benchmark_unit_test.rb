@@ -22,7 +22,9 @@ class BenchmarkUnitTest < Test::Unit::TestCase
       "string" * 100
     end   
     assert_slower(2) do
-      sleep(2.2 * Benchmark::RubySeconds.size)
+      Thread.critical do
+        sleep(2.2 * Benchmark::RubySeconds.size)
+      end
     end
   end 
   

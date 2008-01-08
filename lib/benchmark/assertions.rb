@@ -1,18 +1,16 @@
 
-module Benchmark
+require 'test/unit/assertions'
+
+module Test
   module Unit
     module Assertions
       
       def assert_faster(target = 1/0.0, &block)
-        _wrap_assertion do
-          compare_benchmark(target, :faster, &block)
-        end
+        compare_benchmark(target, :faster, &block)
       end
       
       def assert_slower(target = 0, &block) # Infinity
-        _wrap_assertion do
-          compare_benchmark(target, :slower, &block)
-        end
+        compare_benchmark(target, :slower, &block)
       end      
       
       private
@@ -31,7 +29,7 @@ module Benchmark
         
         multiplier /= 10
         
-        iterations = (CLOCK_TARGET / time).to_i * multiplier
+        iterations = (Benchmark::Unit::CLOCK_TARGET / time).to_i * multiplier
         iterations = 1 if iterations < 1
         
         total = Benchmark::Unit.measure do 
@@ -50,16 +48,6 @@ module Benchmark
         end
       end
       
-    end
-  end
-end
-
-require 'test/unit/error'
-
-module Test
-  module Unit
-    class TestCase
-      include Benchmark::Unit::Assertions
     end
   end
 end
