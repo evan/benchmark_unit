@@ -1,8 +1,9 @@
 
 $LOAD_PATH << File.dirname(__FILE__) + "/../../lib"
 
+# Test both requires
 require 'benchmark/unit'
-require 'test/unit'
+require 'benchmark_unit'
 
 STDERR.puts "RubySeconds.size is #{Benchmark::RubySeconds.size}" if ENV['DEBUG']
 

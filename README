@@ -15,7 +15,11 @@ The public certificate for this gem is at http://rubyforge.org/frs/download.php/
 
 == Usage
 
-In your regular Test::Unit::TestCase, call either <tt>assert_faster</tt> or <tt>assert_slower</tt>. Pass a number of RubySeconds and a block to benchmark.
+First, require the library. Then, in a regular Test::Unit::TestCase, call either <tt>assert_faster</tt> or <tt>assert_slower</tt>. Pass a number of RubySeconds and a block to benchmark.
+
+require 'benchmark/unit'
+
+
 
 == Reporting problems
 
