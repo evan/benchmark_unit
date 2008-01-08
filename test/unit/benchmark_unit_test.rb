@@ -27,7 +27,23 @@ class BenchmarkUnitTest < Test::Unit::TestCase
   end 
   
   def test_failed_assertion_has_clean_backtrace
-    # XXX Todo
+    begin
+      assert_slower(3) do
+        "fast"
+      end
+    rescue Test::Unit::AssertionFailedError => e
+      assert e.backtrace.to_s !~ /compare_benchmark|benchmark.rb/
+    end
+  end
+
+  def test_exception_has_clean_backtrace
+    begin
+      assert_faster(3) do
+        raise "o crap"
+      end
+    rescue RuntimeError => e
+      assert e.backtrace.to_s !~ /compare_benchmark|benchmark.rb/
+    end
   end
   
 end

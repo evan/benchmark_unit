@@ -1,4 +1,3 @@
-benchmark_unit.gemspec
 CHANGELOG
 lib/benchmark/assertions.rb
 lib/benchmark/float.rb

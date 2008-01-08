@@ -1,8 +1,10 @@
 
 require 'benchmark'
 
-require 'rubygems'
-require 'ruby-debug'; Debugger.start
+if ENV['DEBUG']
+  require 'rubygems'
+  require 'ruby-debug'; Debugger.start
+end
 
 require 'benchmark/ruby_seconds'
 require 'benchmark/assertions'
