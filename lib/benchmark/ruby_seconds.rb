@@ -52,7 +52,7 @@ To see what your machine's RubySecond is in clock-seconds, call Benchmark::RubyS
       # Perform some typical Ruby operations so we can measure how long they take on this machine.
       def quanta
         # Allocate things
-        array = [:symbol, "a = 3 if true", 2, Math::PI**2, "large string"*30] * 100
+        array = [[:symbol, "a = 3 if true", 2, Math::PI**2, "large string"*30]] * 100
         # Re-assign
         array.flatten!
         # Process things with a closure
