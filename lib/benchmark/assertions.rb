@@ -1,15 +1,19 @@
 
+require 'test/unit'
+
 module Benchmark
   module Unit
     module Assertions
       
-      def assert_faster(target = 1/0.0, &block)
+      # Assert that the average execution time of the block is faster than the target number of RubySeconds (i.e., takes less time). Default target is 0 (everything fails).
+      def assert_faster(target = 0, &block)
         clean_backtrace do
           compare_benchmark(target, :faster, &block)
         end
       end
       
-      def assert_slower(target = 0, &block) # Infinity
+      # Assert that the average execution time of the block is slower than the target number of RubySeconds (i.e., takes more time). Default target is Infinity (everything fails).
+      def assert_slower(target = 1/0.0, &block) # Infinity
         clean_backtrace do
           compare_benchmark(target, :slower, &block)
         end
@@ -55,7 +59,8 @@ module Benchmark
 
       end
 
-      def clean_backtrace(&block)
+      # Strip our library files from the assertion backtrace.
+      def clean_backtrace(&block) #:nodoc:
         # Modified from Rails' version
         begin
           yield
@@ -73,12 +78,6 @@ module Benchmark
   end
 end
 
-require 'test/unit/error'
-
-module Test
-  module Unit
-    class TestCase
-      include Benchmark::Unit::Assertions
-    end
-  end
+class Test::Unit::TestCase
+  include Benchmark::Unit::Assertions
 end
