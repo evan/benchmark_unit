@@ -8,5 +8,5 @@ Echoe.new("benchmark_unit") do |p|
   p.url = "http://blog.evanweaver.com/files/doc/fauna/benchmark_unit/"  
   p.docs_host = 'blog.evanweaver.com:~/www/bax/public/files/doc/'
   p.require_signed = true  
-  p.test_pattern = ["**/test/**/*.rb"]
+  p.test_pattern = ["test/**/*.rb"]
 end
