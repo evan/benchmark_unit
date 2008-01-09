@@ -40,6 +40,8 @@ To find how many RubySeconds to start with, just omit the argument to the <tt>as
 
 See Benchmark::RubySeconds for more details.
 
+Note that you can't reliably test Benchmark::Unit with <tt>sleep</tt> calls. <tt>sleep</tt> triggers a context switch and doesn't count against the system time of the method.
+
 == Reporting problems
 
 * http://rubyforge.org/forum/forum.php?forum_id=20547

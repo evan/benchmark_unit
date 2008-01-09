@@ -46,7 +46,7 @@ class BenchmarkUnitTest < Test::Unit::TestCase
         "fast"
       end
     rescue Test::Unit::AssertionFailedError => e
-      assert e.backtrace.to_s !~ /compare_benchmark|benchmark.rb/
+      assert e.backtrace.grep(/compare_benchmark|benchmark.rb/)
     end
   end
 
@@ -56,7 +56,7 @@ class BenchmarkUnitTest < Test::Unit::TestCase
         raise "o crap"
       end
     rescue RuntimeError => e
-      assert e.backtrace.to_s !~ /compare_benchmark|benchmark.rb/
+      assert e.backtrace.grep(/compare_benchmark|benchmark.rb/)
     end
   end
   
